@@ -1,4 +1,4 @@
-from db import cliente_db
+""" from db import cliente_db """
 from db.cliente_db import ClienteInDB
 from models.cliente_model import Cliente
 from datetime import date
