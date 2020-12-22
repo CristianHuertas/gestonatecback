@@ -9,7 +9,6 @@ from models.cliente_model import Cliente
 
 router = APIRouter()
 
-
 @router.get("/cliente/registroGetAll") #mostrar todos los clientes
 async def get_clientes(sesion: Session = Depends(obtener_sesion)):
     todos_clientes= sesion.query(ClienteInDB).all()
