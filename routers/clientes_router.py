@@ -9,13 +9,6 @@ from models.cliente_model import Cliente
 
 router = APIRouter()
 
-@router.get("/pruebas")#agregar nuevo cliente
-async def get_clientes(sesion: Session = Depends(obtener_sesion)):
-    nuevo_cliente= ClienteInDB( documento= 804002437, tipo_documento= "cc", razon_social= "descont", contacto= "yo", telefono= 2312344, direccion= "cll bga", ciudad= "bga", correo= "as@asd", detalle= " ")
-    sesion.add(nuevo_cliente)
-    sesion.commit()
-    nuevo_cliente= sesion.query(ClienteInDB).get(nuevo_cliente.documento)
-    return nuevo_cliente
 
 @router.get("/cliente/registroGetAll") #mostrar todos los clientes
 async def get_clientes(sesion: Session = Depends(obtener_sesion)):
@@ -55,6 +48,7 @@ async def update_cliente(cliente: Cliente, sesion: Session = Depends(obtener_ses
         raise HTTPException(status_code=404,
                             detail=" El cliente no existe ")
     
+    cliente_in_db.documento= cliente.documento
     cliente_in_db.tipo_documento= cliente.tipo_documento
     cliente_in_db.razon_social= cliente.razon_social
     cliente_in_db.contacto= cliente.contacto
